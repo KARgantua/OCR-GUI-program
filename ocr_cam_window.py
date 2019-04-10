@@ -13,9 +13,6 @@ class Ui_CamWindow(object):
     def setupUi(self, CamWindow):
         CamWindow.setObjectName("CamWindow")
         CamWindow.resize(700, 800)
-        self.graphicsView = QtWidgets.QGraphicsView(CamWindow)
-        self.graphicsView.setGeometry(QtCore.QRect(0, 0, 700, 700))
-        self.graphicsView.setObjectName("graphicsView")
         self.horizontalLayoutWidget = QtWidgets.QWidget(CamWindow)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(0, 700, 711, 80))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -26,6 +23,10 @@ class Ui_CamWindow(object):
         self.capBtn.setMaximumSize(QtCore.QSize(120, 120))
         self.capBtn.setObjectName("capBtn")
         self.horizontalLayout.addWidget(self.capBtn)
+        self.camLabel = QtWidgets.QLabel(CamWindow)
+        self.camLabel.setGeometry(QtCore.QRect(0, 0, 700, 700))
+        self.camLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.camLabel.setObjectName("camLabel")
 
         self.retranslateUi(CamWindow)
         QtCore.QMetaObject.connectSlotsByName(CamWindow)
@@ -34,6 +35,7 @@ class Ui_CamWindow(object):
         _translate = QtCore.QCoreApplication.translate
         CamWindow.setWindowTitle(_translate("CamWindow", "Form"))
         self.capBtn.setText(_translate("CamWindow", "Capture"))
+        self.camLabel.setText(_translate("CamWindow", "cam"))
 
 
 
