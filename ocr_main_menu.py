@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from ocr_cam_window import *
 
 
 class Ui_MainWindow(object):
@@ -38,10 +39,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.pictBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
-        self.pictBtn.setMaximumSize(QtCore.QSize(120, 16777215))
-        self.pictBtn.setObjectName("pictBtn")
-        self.horizontalLayout_2.addWidget(self.pictBtn)
+        self.camBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
+        self.camBtn.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.camBtn.setObjectName("camBtn")
+        self.horizontalLayout_2.addWidget(self.camBtn)
         self.exitBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget_2)
         self.exitBtn.setMaximumSize(QtCore.QSize(120, 16777215))
         self.exitBtn.setObjectName("exitBtn")
@@ -58,10 +59,12 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.exitBtn.clicked.connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-    
+
+        self.camBtn.clicked.connect(self.openWindow)
+
     def openWindow(self):
         self.window=QtWidgets.QMainWindow()
-        self.ui=Ui_SubWindow()
+        self.ui=Ui_CamWindow()
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -71,11 +74,8 @@ class Ui_MainWindow(object):
         self.langLabel.setText(_translate("MainWindow", "Select Language: "))
         self.langSel.setItemText(0, _translate("MainWindow", "eng"))
         self.langSel.setItemText(1, _translate("MainWindow", "kor"))
-        self.pictBtn.setText(_translate("MainWindow", "Cam"))
-        self.exitBtn.setText(_translate("MainWindow", "Exit"))
-
-
-
+        self.camBtn.setText(_translate("MainWindow", "Cam"))
+        self.exitBtn.setText(_translate("MainWindow", "Exit"))     
 
 if __name__ == "__main__":
     import sys
