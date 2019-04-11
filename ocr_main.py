@@ -26,36 +26,34 @@ def cameraSig(self):
 
 CAM_ID = 0
 def capture(self, camid = CAM_ID):
-    cam = cv2.VideoCapture(camid)
-    imPath = "ocr1.png"
-    if cam.isOpened() == False:
+    self.cam = cv2.VideoCapture(camid)
+    self.imPath = "ocr1.png"
+    if self.cam.isOpened() == False:
         print ('cant open the cam (%d)' % camid)
         return None
 
-    ret, frame = cam.read()
-    if frame is None:
+    self.ret, self.frame = self.cam.read()
+    if self.frame is None:
         print ('frame is not exist')
         return None
     
     # png로 압축 없이 영상 저장 
-    cv2.imwrite(imPath,frame, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
-    cam.release()
-
-    return imPath
+    cv2.imwrite(self.imPath, self.frame, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
+    self.cam.release()
 
 # 현재 Cam Label에서 보여주는 이미지 read 후 tesseract 를 사용해서 텍스트로 변환
 def readImage(self):
-    imPath = self.capture()
-    print(imPath)
-    im = cv2.imread(imPath, cv2.IMREAD_COLOR)
-    config = ('-l kor --oem 1 --psm 3')
-    self.text = pytesseract.image_to_string(im, config=config)
+    self.capture()
+    self.im = cv2.imread(self.imPath, cv2.IMREAD_COLOR)
+    self.config = ('-l kor --oem 1 --psm 3')
+    self.text = pytesseract.image_to_string(self.im, config=self.config)
     self.camLabel.setText(self.text)
 
 # capture 버튼 시그널
 def captureSig(self):
     self.capBtn.clicked.connect(self.readImage)
 
+# 클래스에 함수 추가
 Ui_MainWindow.cameraSig = cameraSig
 Ui_MainWindow.openWindow = openWindow
 
