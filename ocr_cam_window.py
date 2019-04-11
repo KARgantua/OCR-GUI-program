@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import cv2
 
 class Ui_CamWindow(object):
     def setupUi(self, CamWindow):
@@ -31,13 +31,13 @@ class Ui_CamWindow(object):
         self.retranslateUi(CamWindow)
         QtCore.QMetaObject.connectSlotsByName(CamWindow)
 
+        #self.capBtn.clicked.connect(self.startCam)
+
     def retranslateUi(self, CamWindow):
         _translate = QtCore.QCoreApplication.translate
         CamWindow.setWindowTitle(_translate("CamWindow", "Form"))
         self.capBtn.setText(_translate("CamWindow", "Capture"))
         self.camLabel.setText(_translate("CamWindow", "cam"))
-
-
 
 
 if __name__ == "__main__":

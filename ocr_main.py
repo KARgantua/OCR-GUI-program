@@ -1,3 +1,5 @@
+# OCR 동작 부분
+
 from ocr_main_window import *
 from ocr_cam_window import *
 
