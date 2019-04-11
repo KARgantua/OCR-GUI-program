@@ -5,6 +5,7 @@ from ocr_cam_window import *
 import pytesseract
 import cv2
 from PyQt5.QtGui import QPixmap
+from show_video import *
 
 #===========================================
 # Main Window 에서 실행할 함수 리스트
@@ -17,36 +18,24 @@ def openWindow(self):
     self.ui.setupUi(self.window)
     self.ui.setConfig(self.langSel.currentText(), self.engSel.currentText())
     self.ui.captureSig()
-    self.ui.startVideo()
     self.window.show()
+
+# OpenCV 실행
+def showVideo(self):
+    thread = QtCore.QThread()
+    thread.start()
+    vid = ShowVideo()
+    vid.moveToThread(thread)
 
 # camera 버튼 시그널
 def cameraSig(self):
     self.camBtn.clicked.connect(self.openWindow)
+    self.camBtn.clicked.connect(self.showVideo)
 
 #===========================================
 # Cam Window에서 실행할 함수 리스트
 #===========================================
 
-# Cam window 시작과 함께 실행되어 영상 스트리밍
-CAM_ID = 0
-def startVideo(self, camid = CAM_ID):
-    self.cam = cv2.VideoCapture(camid)
-
-    ret, image = self.cam.read()
-    self.height, self.width = image.shape[:2]
-
-    run_video = True
-    while run_video:
-        ret, image = self.cam.read()
-        color_swapped_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        qt_image = QtGui.QImage(color_swapped_image, 
-                                self.height, 
-                                self.width,
-                                color_swapped_image.strides[0],
-                                QtGui.QImage.Format_RGB888)
-        self.vidLabel.setPixmap(QPixmap(qt_image))
-        
 # 찍기만 함
 def capture(self):
     self.imPath = "ocr1.png"
@@ -86,12 +75,12 @@ def setConfig(self, lang, engn):
 # 클래스에 함수 추가
 Ui_MainWindow.cameraSig = cameraSig
 Ui_MainWindow.openWindow = openWindow
+Ui_MainWindow.showVideo = showVideo
 
 Ui_CamWindow.captureSig = captureSig
 Ui_CamWindow.capture = capture
 Ui_CamWindow.readImage = readImage
 Ui_CamWindow.setConfig = setConfig
-Ui_CamWindow.startVideo = startVideo
 
 if __name__ == "__main__":
     import sys
