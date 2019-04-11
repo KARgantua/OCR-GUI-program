@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import cv2
+
 
 class Ui_CamWindow(object):
     def setupUi(self, CamWindow):
@@ -23,21 +23,20 @@ class Ui_CamWindow(object):
         self.capBtn.setMaximumSize(QtCore.QSize(120, 120))
         self.capBtn.setObjectName("capBtn")
         self.horizontalLayout.addWidget(self.capBtn)
-        self.camLabel = QtWidgets.QLabel(CamWindow)
-        self.camLabel.setGeometry(QtCore.QRect(0, 0, 700, 700))
-        self.camLabel.setAlignment(QtCore.Qt.AlignCenter)
-        self.camLabel.setObjectName("camLabel")
+        self.vidLabel = QtWidgets.QLabel(CamWindow)
+        self.vidLabel.setGeometry(QtCore.QRect(0, 0, 701, 691))
+        self.vidLabel.setObjectName("vidLabel")
 
         self.retranslateUi(CamWindow)
         QtCore.QMetaObject.connectSlotsByName(CamWindow)
-
-        #self.capBtn.clicked.connect(self.startCam)
 
     def retranslateUi(self, CamWindow):
         _translate = QtCore.QCoreApplication.translate
         CamWindow.setWindowTitle(_translate("CamWindow", "Form"))
         self.capBtn.setText(_translate("CamWindow", "Capture"))
-        self.camLabel.setText(_translate("CamWindow", "cam"))
+        self.vidLabel.setText(_translate("CamWindow", "Video"))
+
+
 
 
 if __name__ == "__main__":
