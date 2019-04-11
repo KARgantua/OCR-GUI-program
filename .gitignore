@@ -1,3 +1,4 @@
 test/
 __pycache__/
-test/
+test/*
+test/ocr1.py
