@@ -8,10 +8,11 @@ def openWindow(self):
     self.ui=Ui_CamWindow()
     self.ui.setupUi(self.window)
     self.window.show()
-def signals(self):
+
+def camera(self):
     self.camBtn.clicked.connect(self.openWindow)
 
-Ui_MainWindow.signals = signals
+Ui_MainWindow.camera = camera
 Ui_MainWindow.openWindow = openWindow
 
 if __name__ == "__main__":
@@ -20,6 +21,6 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.signals()
+    ui.camera()
     MainWindow.show()
     sys.exit(app.exec_())
