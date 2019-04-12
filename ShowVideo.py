@@ -20,12 +20,11 @@ class ShowVideo(QtCore.QObject):
 
     @QtCore.pyqtSlot()
     def startVideo(self):
-        global image
 
         run_video = True
         while run_video:
-            ret, image = self.camera.read()
-            color_swapped_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            ret, self.image = self.camera.read()
+            color_swapped_image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
 
             qt_image1 = QtGui.QImage(color_swapped_image.data,
                                     self.width,
