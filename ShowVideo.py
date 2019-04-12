@@ -3,6 +3,7 @@ import sys
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5 import QtGui
+import numpy
 
 class ShowVideo(QtCore.QObject):
 
@@ -14,6 +15,7 @@ class ShowVideo(QtCore.QObject):
     height, width = image.shape[:2]
 
     VideoSignal = QtCore.pyqtSignal(QtGui.QImage)
+    ImageSignal = QtCore.pyqtSignal(numpy.ndarray)
 
     def __init__(self, parent=None):
         super(ShowVideo, self).__init__(parent)

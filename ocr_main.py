@@ -4,6 +4,7 @@ from ShowVideo import *
 from ImageViewer import *
 from main_window import *
 from sub_window import *
+import numpy
 
 #===================================================
 # MainWindow에서 실행할 함수 리스트
@@ -28,16 +29,29 @@ def capSig(self):
 def exitSig(self):
     self.exitBtn.clicked.connect(sys.exit)
 
+@QtCore.pyqtSlot(numpy.ndarray)
+def procOcr(self, image):
+    lang = self.langCbox.currentText()
+    config = ('-l %s --oem 1 --psm 3' % lang)
+    text = pytesseract.image_to_string(self.image, config=config)
+    self.openWindow(text)
+
 #===================================================
 # ShowVideo에서 실행할 함수 리스트
 #===================================================
 
+# def capPic(self):
+#     cv2.imwrite("img1.png",self.image, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
+#     config = ('-l kor --oem 1 --psm 3')
+#     im = cv2.imread("img1.png", cv2.IMREAD_COLOR)
+#     text = pytesseract.image_to_string(im, config=config)
+#     self.openWindow(text)
+
+#self.langCbox.currentText()
+
 def capPic(self):
     cv2.imwrite("img1.png",self.image, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
-    config = ('-l kor --oem 1 --psm 3')
-    im = cv2.imread("img1.png", cv2.IMREAD_COLOR)
-    text = pytesseract.image_to_string(im, config=config)
-    self.openWindow(text)
+    self.ImageSignal.emit(self.image)
 
 #===================================================
 # SubWindow에서 실행할 함수 리스트
@@ -55,6 +69,7 @@ Ui_MainWindow.onSig = onSig
 Ui_MainWindow.capSig = capSig
 Ui_MainWindow.exitSig = exitSig
 Ui_MainWindow.openWindow = openWindow
+Ui_MainWindow.procOcr = procOcr
 
 ShowVideo.capPic = capPic
 ShowVideo.openWindow = openWindow
@@ -74,11 +89,14 @@ if __name__ == "__main__":
     # 이미지 뷰어 위젯 객체 생성
     image_viewer1 = ImageViewer()
 
+    ui = Ui_MainWindow()
+
     # 시그널 연결
     vid.VideoSignal.connect(image_viewer1.setImage)
+    vid.ImageSignal.connect(ui.procOcr)
 
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    
     ui.setupUi(MainWindow)
     ui.addWidget(image_viewer1)
     ui.onSig()
