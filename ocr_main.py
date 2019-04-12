@@ -29,12 +29,15 @@ def capSig(self):
 def exitSig(self):
     self.exitBtn.clicked.connect(sys.exit)
 
-@QtCore.pyqtSlot(numpy.ndarray)
-def procOcr(self, image):
+def procOcr(self):
+    image = cv2.imread("img1.png", cv2.IMREAD_COLOR)
     lang = self.langCbox.currentText()
     config = ('-l %s --oem 1 --psm 3' % lang)
-    text = pytesseract.image_to_string(self.image, config=config)
+    text = pytesseract.image_to_string(image, config=config)
     self.openWindow(text)
+
+def foo1():
+    pass
 
 #===================================================
 # ShowVideo에서 실행할 함수 리스트
@@ -51,7 +54,7 @@ def procOcr(self, image):
 
 def capPic(self):
     cv2.imwrite("img1.png",self.image, params=[cv2.IMWRITE_PNG_COMPRESSION,0])
-    self.ImageSignal.emit(self.image)
+    self.ImageSignal.emit()
 
 #===================================================
 # SubWindow에서 실행할 함수 리스트

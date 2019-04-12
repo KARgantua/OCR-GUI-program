@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import numpy
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -77,6 +77,9 @@ class Ui_MainWindow(object):
         self.langLabel.setText(_translate("MainWindow", "언어 선택"))
         self.langCbox.setItemText(0, _translate("MainWindow", "eng"))
         self.langCbox.setItemText(1, _translate("MainWindow", "kor"))
+    @QtCore.pyqtSlot(str)
+    def foo2(self, str):
+        pass
 
 
 

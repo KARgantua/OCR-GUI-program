@@ -15,7 +15,7 @@ class ShowVideo(QtCore.QObject):
     height, width = image.shape[:2]
 
     VideoSignal = QtCore.pyqtSignal(QtGui.QImage)
-    ImageSignal = QtCore.pyqtSignal(numpy.ndarray)
+    ImageSignal = QtCore.pyqtSignal()
 
     def __init__(self, parent=None):
         super(ShowVideo, self).__init__(parent)
