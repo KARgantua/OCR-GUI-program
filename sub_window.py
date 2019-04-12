@@ -16,7 +16,7 @@ class Ui_SubWindow(object):
         self.centralwidget = QtWidgets.QWidget(SubWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.textLabel = QtWidgets.QLabel(self.centralwidget)
-        self.textLabel.setGeometry(QtCore.QRect(360, 0, 67, 17))
+        self.textLabel.setGeometry(QtCore.QRect(0, 0, 801, 551))
         self.textLabel.setObjectName("textLabel")
         SubWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(SubWindow)
