@@ -13,8 +13,7 @@ class ShowVideo(QtCore.QObject):
     ret, image = camera.read()
     height, width = image.shape[:2]
 
-    VideoSignal1 = QtCore.pyqtSignal(QtGui.QImage)
-    VideoSignal2 = QtCore.pyqtSignal(QtGui.QImage)
+    VideoSignal = QtCore.pyqtSignal(QtGui.QImage)
 
     def __init__(self, parent=None):
         super(ShowVideo, self).__init__(parent)
@@ -33,7 +32,7 @@ class ShowVideo(QtCore.QObject):
                                     self.height,
                                     color_swapped_image.strides[0],
                                     QtGui.QImage.Format_RGB888)
-            self.VideoSignal1.emit(qt_image1)
+            self.VideoSignal.emit(qt_image1)
 
             loop = QtCore.QEventLoop()
             QtCore.QTimer.singleShot(25, loop.quit) #25 ms

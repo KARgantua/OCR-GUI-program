@@ -24,8 +24,8 @@ class ShowVideo(QtCore.QObject):
     def startVideo(self):
         global image
 
-        run_video = True
-        while run_video:
+        self.run_video = True
+        while self.run_video:
             ret, image = self.camera.read()
             color_swapped_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -53,6 +53,9 @@ class ShowVideo(QtCore.QObject):
             loop = QtCore.QEventLoop()
             QtCore.QTimer.singleShot(25, loop.quit) #25 ms
             loop.exec_()
+    def capturePictur(self):
+        pass
+        
 
     @QtCore.pyqtSlot()
     def canny(self):
@@ -101,8 +104,10 @@ if __name__ == '__main__':
 
     push_button1 = QtWidgets.QPushButton('Start')
     push_button2 = QtWidgets.QPushButton('Canny')
+    push_button3 = QtWidgets.QPushButton('Capture')
     push_button1.clicked.connect(vid.startVideo)
     push_button2.clicked.connect(vid.canny)
+    push_button3.clicked.connect(vid.capturePictur)
 
     vertical_layout = QtWidgets.QVBoxLayout()
     horizontal_layout = QtWidgets.QHBoxLayout()
@@ -111,6 +116,7 @@ if __name__ == '__main__':
     vertical_layout.addLayout(horizontal_layout)
     vertical_layout.addWidget(push_button1)
     vertical_layout.addWidget(push_button2)
+    vertical_layout.addWidget(push_button3)
 
     layout_widget = QtWidgets.QWidget()
     layout_widget.setLayout(vertical_layout)

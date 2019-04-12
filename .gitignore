@@ -5,3 +5,4 @@ test/*
 test/ocr1.py
 *.png
 *.jpg
+ocr_cam_widget.py
